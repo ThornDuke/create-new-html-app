@@ -1,6 +1,6 @@
 # create-new-html-app
 
-<!-- Extension description -->
+<!-- App description -->
 
 ## Features
 
