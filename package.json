@@ -1,0 +1,22 @@
+{
+  "name": "create-new-html-app",
+  "version": "0.0.0",
+  "description": "Set up a simple HTML web app by running one command.",
+  "keywords": [
+    "cli",
+    "code-generation",
+    "html",
+    "generator"
+  ],
+  "homepage": "https://github.com/owner/project#readme",
+  "bugs": {
+    "url": "https://github.com/owner/project/issues",
+    "email": "project@hostname.com"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thorn Duke",
+  "license": "GPL-3.0-or-later"
+}
