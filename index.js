@@ -1,6 +1,7 @@
 const fs = require('fs');
 const minimist = require('minimist');
 const prompt = require('prompt-sync')();
+const chalk = require('chalk');
 
 const templates = require('./src/templates.js');
 const exitCodes = require('./src/exitcodes.js');
@@ -32,8 +33,8 @@ if (args.help || args.h || !projectName || process.argv.length > 3) {
  * //////////////////////////////////////// */
 
 if (fs.existsSync(projectName)) {
-  const answer = prompt(`'Directory ${projectName} already exists. Overwite it? [Y n] `);
-  if (['n', 'no'].includes(answer.toLowerCase())) {
+  const answer = prompt(chalk.yellowBright.bold(`\nThe directory ${projectName} already exists. Overwite it? [Y n] `));
+  if (!['y', 'yes'].includes(answer.toLowerCase())) {
     process.exit(exitCodes.EC_USER_TERMINATED);
   }
 }
@@ -41,6 +42,15 @@ if (fs.existsSync(projectName)) {
 const mkSecureDir = dir => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
+  }
+};
+
+const mkFile = ({ path, logMsg, template, errMsg }) => {
+  console.log(logMsg);
+  try {
+    fs.writeFileSync(path, template);
+  } catch (err) {
+    console.error(errMsg, err);
   }
 };
 
@@ -60,74 +70,72 @@ try {
   console.error('Error creating the directory tree:', err);
 }
 
-// creates the HTML file
 console.log('### creation of the files:');
-console.log('### - index.html');
-try {
-  fs.writeFileSync(`${projectName}/HTML/index.html`, templates.html(projectName));
-} catch (err) {
-  console.error('Error creating the HTML file:', err);
-}
+
+// creates the HTML file
+mkFile({
+  logMsg: '### - index.html',
+  path: `${projectName}/HTML/index.html`,
+  template: templates.html(projectName),
+  errMsg: 'Error creating the HTML file:',
+});
 
 // creates the css file
-console.log('### - public/styles.css');
-try {
-  fs.writeFileSync(`${projectName}/HTML/public/styles.css`, templates.css(projectName));
-} catch (err) {
-  console.error('Error creating the css file:', err);
-}
+mkFile({
+  logMsg: '### - public/styles.css',
+  path: `${projectName}/HTML/public/styles.css`,
+  template: templates.css(projectName),
+  errMsg: 'Error creating the css file:',
+});
 
 // creates the js file
-console.log('### - public/script.js');
-try {
-  fs.writeFileSync(`${projectName}/HTML/public/script.js`, templates.js(projectName));
-} catch (err) {
-  console.error('Error creating the js file:', err);
-}
+mkFile({
+  logMsg: '### - public/script.js',
+  path: `${projectName}/HTML/public/script.js`,
+  template: templates.js(projectName),
+  errMsg: 'Error creating the js file:',
+});
 
 // creates the file .prettierrc
-console.log('### - .prettierrc');
-try {
-  fs.writeFileSync(`${projectName}/HTML/.prettierrc`, templates.prettier());
-} catch (err) {
-  console.error('Error creating the file .prettierrc:', err);
-}
+mkFile({
+  logMsg: '### - .prettierrc',
+  path: `${projectName}/HTML/.prettierrc`,
+  template: templates.prettier(),
+  errMsg: 'Error creating the file .prettierrc:',
+});
 
 // creates the file .gitignore
-console.log('### - .gitignore');
-try {
-  fs.writeFileSync(`${projectName}/HTML/.gitignore`, templates.gitIgnore());
-} catch (err) {
-  console.error('Error creating the file ,gitignore:', err);
-}
+mkFile({
+  logMsg: '### - .gitignore',
+  path: `${projectName}/HTML/.gitignore`,
+  template: templates.gitIgnore(),
+  errMsg: 'Error creating the file ,gitignore:',
+});
 
 // creates the file .vscode/launch.json
-console.log('### - .vscode/launch.json');
-try {
-  fs.writeFileSync(`${projectName}/HTML/.vscode/launch.json`, templates.launch());
-} catch (err) {
-  console.error('Error creating the file .vscode/launch.json:', err);
-}
+mkFile({
+  logMsg: '### - .vscode/launch.json',
+  path: `${projectName}/HTML/.vscode/launch.json`,
+  template: templates.launch(),
+  errMsg: 'Error creating the file .vscode/launch.json:',
+});
 
 // creates the file CHANGELOG.md
-console.log('### - CHANGELOG.md');
-try {
-  fs.writeFileSync(`${projectName}/HTML/CHANGELOG.md`, templates.changeLog());
-} catch (err) {
-  console.error('Error creating the file CHANGELOG.md:', err);
-}
+mkFile({
+  logMsg: '### - CHANGELOG.md',
+  path: `${projectName}/HTML/CHANGELOG.md`,
+  template: templates.changeLog(),
+  errMsg: 'Error creating the file CHANGELOG.md:',
+});
 
 // creates the file README.md
-console.log('### - README.md');
-try {
-  fs.writeFileSync(`${projectName}/HTML/README.md`, templates.readme());
-} catch (err) {
-  console.error('Error creating the file README.md:', err);
-}
+mkFile({
+  logMsg: '### - README.md',
+  path: `${projectName}/HTML/README.md`,
+  template: templates.readme(),
+  errMsg: 'Error creating the file README.md:',
+});
 
-console.log('###');
-console.log('### Project created successfully');
-console.log('### Happy hacking!');
-console.log('###');
+console.log(templates.greetings(projectName));
 
 module.exports = () => {};

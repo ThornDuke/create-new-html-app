@@ -36,9 +36,9 @@ const prettier = () => `{
 const gitIgnore = () => `.vscode`;
 
 const launch = () => `{
-  // Usare IntelliSense per informazioni sui possibili attributi.
-  // Al passaggio del mouse vengono visualizzate le descrizioni degli attributi esistenti.
-  // Per altre informazioni, visitare: https://go.microsoft.com/fwlink/?linkid=830387
+  // Use IntelliSense to learn about possible attributes.
+  // Existing attribute descriptions appear on mouseover.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
@@ -101,6 +101,12 @@ ${appName} -h, --help               print this help and exit
 ${appName} -V, --version            print the version number
 `;
 
+const greetings = appName => `###
+### Project ${appName} created successfully
+### Happy hacking!
+###
+`;
+
 module.exports = {
   html,
   css,
@@ -111,4 +117,5 @@ module.exports = {
   readme,
   js,
   help,
+  greetings,
 };
