@@ -9,6 +9,7 @@
 ## [Unreleased]
 
 - Setted a bin system
+- Updated <package.json> for the publication
 
 ## [1.0.0] - 2024-05-12
 

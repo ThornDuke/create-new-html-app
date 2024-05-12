@@ -6,17 +6,27 @@
     "cli",
     "code-generation",
     "html",
-    "generator"
+    "generator",
+    "create-html-app"
   ],
-  "homepage": "https://github.com/owner/project#readme",
+  "preferGlobal": true,
+  "homepage": "https://github.com/ThornDuke/create-new-html-app/#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThornDuke/create-new-html-app.git"
+  },
   "bugs": {
-    "url": "https://github.com/owner/project/issues",
-    "email": "project@hostname.com"
+    "url": "https://github.com/ThornDuke/create-new-html-app/issues"
+  },
+  "engines": {
+    "node": ">=8"
   },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --no-warnings index.js"
+    "start": "node --no-warnings index.js",
+    "format": "prettier . --write",
+    "stylecheck": "prettier . --check"
   },
   "author": "Thorn Duke",
   "license": "GPL-3.0-or-later",
@@ -26,5 +36,8 @@
   "dependencies": {
     "minimist": "^1.2.8",
     "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5"
   }
 }
