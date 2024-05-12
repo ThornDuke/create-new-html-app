@@ -1,4 +1,4 @@
-export const htmlTemplate = appName => `<!DOCTYPE html>
+const html = appName => `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,9 +13,9 @@ export const htmlTemplate = appName => `<!DOCTYPE html>
   </body>
 </html>`;
 
-export const cssTemplate = appName => `/* project ${appName} */`;
+const css = appName => `/* project ${appName} */`;
 
-export const prettierTemplate = () => `{
+const prettier = () => `{
   "printWidth": 120,
   "tabWidth": 2,
   "useTabs": false,
@@ -33,9 +33,9 @@ export const prettierTemplate = () => `{
   "singleAttributePerLine": false
 }`;
 
-export const gitIgnoreTemplate = () => `.vscode`;
+const gitIgnore = () => `.vscode`;
 
-export const launchTemplate = () => `{
+const launch = () => `{
   // Usare IntelliSense per informazioni sui possibili attributi.
   // Al passaggio del mouse vengono visualizzate le descrizioni degli attributi esistenti.
   // Per altre informazioni, visitare: https://go.microsoft.com/fwlink/?linkid=830387
@@ -50,7 +50,7 @@ export const launchTemplate = () => `{
   ]
 }`;
 
-export const changeLogTemplate = () => `# Change Log
+const changeLog = () => `# Change Log
 
 <!--
 ## [Unreleased] | [major.minor.patch] - yyyy-mm-dd
@@ -61,7 +61,7 @@ export const changeLogTemplate = () => `# Change Log
 ## [Unreleased]
 `;
 
-export const readmeTemplate = appName => `# ${appName}
+const readme = appName => `# ${appName}
 
 <!-- App description -->
 
@@ -84,12 +84,12 @@ export const readmeTemplate = appName => `# ${appName}
 ## Acknowledgements
 `;
 
-export const jsTemplate = appName =>
+const js = appName =>
   `/**
  * project ${appName}
  */`;
 
-export const helpScreen = (appName, appVersion, appDescription) => `
+const help = (appName, appVersion, appDescription) => `
 ${appName} v${appVersion}
 
 ${appDescription}
@@ -100,3 +100,15 @@ ${appName} <project-name>           create the project
 ${appName} -h, --help               print this help and exit
 ${appName} -V, --version            print the version number
 `;
+
+module.exports = {
+  html,
+  css,
+  prettier,
+  gitIgnore,
+  launch,
+  changeLog,
+  readme,
+  js,
+  help,
+};

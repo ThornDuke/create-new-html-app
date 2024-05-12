@@ -1,38 +1,35 @@
-import fs from 'fs';
-import prompts from 'prompts';
-import {
-  htmlTemplate,
-  cssTemplate,
-  jsTemplate,
-  helpScreen,
-  prettierTemplate,
-  gitIgnoreTemplate,
-  launchTemplate,
-  changeLogTemplate,
-  readmeTemplate,
-} from './src/constants.js';
+const fs = require('fs');
+const prompts = require('prompts');
+const minimist = require('minimist');
 
-import metaData from './package.json' assert { type: 'json' };
+const templates = require('./src/templates.js');
+const exitCodes = require('./src/exitcodes.js');
+const packageData = require('./package.json');
 
-const [nodeLocation, fileLocation, projectName] = process.argv;
+/* ///////////////////////////////////////////
+ *
+ * Command line management
+ *
+ * //////////////////////////////////////// */
 
-switch (projectName) {
-  case undefined:
-  case '-h':
-  case '--help':
-    console.log(helpScreen(metaData.name, metaData.version, metaData.description));
-    process.exit();
-  case '-V':
-  case '--version':
-    console.log(`\n${metaData.name} v${metaData.version}\n`);
-    process.exit();
-  default:
-    break;
+const args = minimist(process.argv.slice(2));
+let projectName = args._[0];
+
+if (args.version || args.v) {
+  console.log(`\n${packageData.name} v${packageData.version}\n`);
+  process.exit(exitCodes.EC_VERSION_DISPLAYED);
 }
 
-const currentPath = process.cwd();
-const EC_SUCCESS = 0;
-const EC_USER_TERMINATED = 1;
+if (args.help || args.h || !projectName || process.argv.length > 3) {
+  console.log(templates.help(packageData.name, packageData.version, packageData.description));
+  process.exit(exitCodes.EC_HELP_DISPLAYED);
+}
+
+/* ///////////////////////////////////////////
+ *
+ * Border cases
+ *
+ * //////////////////////////////////////// */
 
 // if the directory already exists, it asks whether to overwrite it
 if (fs.existsSync(projectName)) {
@@ -52,10 +49,16 @@ if (fs.existsSync(projectName)) {
   })();
 }
 
+/* ///////////////////////////////////////////
+ *
+ * Main routine
+ *
+ * //////////////////////////////////////// */
+
 // ...otherwise:
 console.log('');
 console.log('');
-console.log(`##### ${metaData.name} v${metaData.version}`);
+console.log(`##### ${packageData.name} v${packageData.version}`);
 console.log('###');
 // creates the directory tree
 console.log('### creation of the directory tree');
@@ -73,7 +76,7 @@ try {
 console.log('### creation of the files:');
 console.log('### - index.html');
 try {
-  fs.writeFileSync(`${projectName}/HTML/index.html`, htmlTemplate(projectName));
+  fs.writeFileSync(`${projectName}/HTML/index.html`, templates.html(projectName));
 } catch (err) {
   console.error('Error creating the HTML file:', err);
 }
@@ -81,7 +84,7 @@ try {
 // creates the css file
 console.log('### - public/styles.css');
 try {
-  fs.writeFileSync(`${projectName}/HTML/public/styles.css`, cssTemplate(projectName));
+  fs.writeFileSync(`${projectName}/HTML/public/styles.css`, templates.css(projectName));
 } catch (err) {
   console.error('Error creating the css file:', err);
 }
@@ -89,7 +92,7 @@ try {
 // creates the js file
 console.log('### - public/script.js');
 try {
-  fs.writeFileSync(`${projectName}/HTML/public/script.js`, jsTemplate(projectName));
+  fs.writeFileSync(`${projectName}/HTML/public/script.js`, templates.js(projectName));
 } catch (err) {
   console.error('Error creating the js file:', err);
 }
@@ -97,7 +100,7 @@ try {
 // creates the file .prettierrc
 console.log('### - .prettierrc');
 try {
-  fs.writeFileSync(`${projectName}/HTML/.prettierrc`, prettierTemplate());
+  fs.writeFileSync(`${projectName}/HTML/.prettierrc`, templates.prettier());
 } catch (err) {
   console.error('Error creating the file .prettierrc:', err);
 }
@@ -105,7 +108,7 @@ try {
 // creates the file .gitignore
 console.log('### - .gitignore');
 try {
-  fs.writeFileSync(`${projectName}/HTML/.gitignore`, gitIgnoreTemplate());
+  fs.writeFileSync(`${projectName}/HTML/.gitignore`, templates.gitIgnore());
 } catch (err) {
   console.error('Error creating the file ,gitignore:', err);
 }
@@ -113,7 +116,7 @@ try {
 // creates the file .vscode/launch.json
 console.log('### - .vscode/launch.json');
 try {
-  fs.writeFileSync(`${projectName}/HTML/.vscode/launch.json`, launchTemplate());
+  fs.writeFileSync(`${projectName}/HTML/.vscode/launch.json`, templates.launch());
 } catch (err) {
   console.error('Error creating the file .vscode/launch.json:', err);
 }
@@ -121,7 +124,7 @@ try {
 // creates the file CHANGELOG.md
 console.log('### - CHANGELOG.md');
 try {
-  fs.writeFileSync(`${projectName}/HTML/CHANGELOG.md`, changeLogTemplate());
+  fs.writeFileSync(`${projectName}/HTML/CHANGELOG.md`, templates.changeLog());
 } catch (err) {
   console.error('Error creating the file CHANGELOG.md:', err);
 }
@@ -129,7 +132,7 @@ try {
 // creates the file README.md
 console.log('### - README.md');
 try {
-  fs.writeFileSync(`${projectName}/HTML/README.md`, readmeTemplate());
+  fs.writeFileSync(`${projectName}/HTML/README.md`, templates.readme());
 } catch (err) {
   console.error('Error creating the file README.md:', err);
 }
@@ -138,3 +141,5 @@ console.log('###');
 console.log('### Project created successfully');
 console.log('### Happy hacking!');
 console.log('###');
+
+module.exports = () => {};
