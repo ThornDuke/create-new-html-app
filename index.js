@@ -1,6 +1,6 @@
 const fs = require('fs');
-const prompts = require('prompts');
 const minimist = require('minimist');
+const prompt = require('prompt-sync')();
 
 const templates = require('./src/templates.js');
 const exitCodes = require('./src/exitcodes.js');
@@ -27,35 +27,23 @@ if (args.help || args.h || !projectName || process.argv.length > 3) {
 
 /* ///////////////////////////////////////////
  *
- * Border cases
- *
- * //////////////////////////////////////// */
-
-// if the directory already exists, it asks whether to overwrite it
-if (fs.existsSync(projectName)) {
-  (async () => {
-    const response = await prompts({
-      type: 'toggle',
-      name: 'answer',
-      message: `The '${projectName}' directory already exists. Do you want to overwrite it?`,
-      initial: true,
-      active: 'yes',
-      inactive: 'no',
-    });
-    if (response.answer === false) {
-      // if the answer is 'no'...
-      process.exit(EC_USER_TERMINATED);
-    }
-  })();
-}
-
-/* ///////////////////////////////////////////
- *
  * Main routine
  *
  * //////////////////////////////////////// */
 
-// ...otherwise:
+if (fs.existsSync(projectName)) {
+  const answer = prompt(`'Directory ${projectName} already exists. Overwite it? [Y n] `);
+  if (['n', 'no'].includes(answer.toLowerCase())) {
+    process.exit(exitCodes.EC_USER_TERMINATED);
+  }
+}
+
+const mkSecureDir = dir => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
+};
+
 console.log('');
 console.log('');
 console.log(`##### ${packageData.name} v${packageData.version}`);
@@ -63,11 +51,11 @@ console.log('###');
 // creates the directory tree
 console.log('### creation of the directory tree');
 try {
-  fs.mkdirSync(projectName);
-  fs.mkdirSync(`${projectName}/HTML`);
-  fs.mkdirSync(`${projectName}/HTML/.vscode`);
-  fs.mkdirSync(`${projectName}/HTML/public`);
-  fs.mkdirSync(`${projectName}/HTML/src`);
+  mkSecureDir(`${projectName}`);
+  mkSecureDir(`${projectName}/HTML`);
+  mkSecureDir(`${projectName}/HTML/.vscode`);
+  mkSecureDir(`${projectName}/HTML/public`);
+  mkSecureDir(`${projectName}/HTML/src`);
 } catch (err) {
   console.error('Error creating the directory tree:', err);
 }
