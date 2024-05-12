@@ -121,5 +121,7 @@ dist
 # this project
 ##
 project-notes.*
+package-lock.json
+project-notes.md
 
 # End of file
