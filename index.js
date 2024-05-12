@@ -1,12 +1,3 @@
-/**
- * create-new-html-app
- *
- * Thorn Duke
- * first scratch: maj 11, 2024
- * licence: GPL-3.0-or-later
- */
-
-//const fs = require('fs');
 import fs from 'fs';
 import prompts from 'prompts';
 import {
@@ -43,7 +34,7 @@ const currentPath = process.cwd();
 const EC_SUCCESS = 0;
 const EC_USER_TERMINATED = 1;
 
-// se la directory esiste già, chiede se sovrascriverla
+// if the directory already exists, it asks whether to overwrite it
 if (fs.existsSync(projectName)) {
   (async () => {
     const response = await prompts({
@@ -55,19 +46,19 @@ if (fs.existsSync(projectName)) {
       inactive: 'no',
     });
     if (response.answer === false) {
-      // se risposta è no...
+      // if the answer is 'no'...
       process.exit(EC_USER_TERMINATED);
     }
   })();
 }
 
-// ... altrimenti:
+// ...otherwise:
 console.log('');
 console.log('');
 console.log(`##### ${metaData.name} v${metaData.version}`);
 console.log('###');
-// crea il sistema di directory
-console.log("### creo l'albero delle directory");
+// creates the directory tree
+console.log('### creation of the directory tree');
 try {
   fs.mkdirSync(projectName);
   fs.mkdirSync(`${projectName}/HTML`);
@@ -75,75 +66,75 @@ try {
   fs.mkdirSync(`${projectName}/HTML/public`);
   fs.mkdirSync(`${projectName}/HTML/src`);
 } catch (err) {
-  console.error("Errore nella creazione dell'albero delle directory:", err);
+  console.error('Error creating the directory tree:', err);
 }
 
-// crea il file html
-console.log('### creo i file:');
+// creates the HTML file
+console.log('### creation of the files:');
 console.log('### - index.html');
 try {
   fs.writeFileSync(`${projectName}/HTML/index.html`, htmlTemplate(projectName));
 } catch (err) {
-  console.error('Errore nella creazione del file HTML:', err);
+  console.error('Error creating the HTML file:', err);
 }
 
-// crea il file css
+// creates the css file
 console.log('### - public/styles.css');
 try {
   fs.writeFileSync(`${projectName}/HTML/public/styles.css`, cssTemplate(projectName));
 } catch (err) {
-  console.error('Errore nella creazione del file css:', err);
+  console.error('Error creating the css file:', err);
 }
 
-// crea il file js
+// creates the js file
 console.log('### - public/script.js');
 try {
   fs.writeFileSync(`${projectName}/HTML/public/script.js`, jsTemplate(projectName));
 } catch (err) {
-  console.error('Errore nella creazione del file js:', err);
+  console.error('Error creating the js file:', err);
 }
 
-// crea il file .prettierrc
+// creates the file .prettierrc
 console.log('### - .prettierrc');
 try {
   fs.writeFileSync(`${projectName}/HTML/.prettierrc`, prettierTemplate());
 } catch (err) {
-  console.error('Errore nella creazione del file .prettierrc:', err);
+  console.error('Error creating the file .prettierrc:', err);
 }
 
-// crea il file .gitignore
+// creates the file .gitignore
 console.log('### - .gitignore');
 try {
   fs.writeFileSync(`${projectName}/HTML/.gitignore`, gitIgnoreTemplate());
 } catch (err) {
-  console.error('Errore nella creazione del file .gitignore:', err);
+  console.error('Error creating the file ,gitignore:', err);
 }
 
-// crea il file .vscode/launch.json
+// creates the file .vscode/launch.json
 console.log('### - .vscode/launch.json');
 try {
   fs.writeFileSync(`${projectName}/HTML/.vscode/launch.json`, launchTemplate());
 } catch (err) {
-  console.error('Errore nella creazione del file launch.json:', err);
+  console.error('Error creating the file .vscode/launch.json:', err);
 }
 
-// crea il file CHANGELOG.md
+// creates the file CHANGELOG.md
 console.log('### - CHANGELOG.md');
 try {
   fs.writeFileSync(`${projectName}/HTML/CHANGELOG.md`, changeLogTemplate());
 } catch (err) {
-  console.error('Errore nella creazione del file CHANGELOG.md:', err);
+  console.error('Error creating the file CHANGELOG.md:', err);
 }
 
-// crea il file README.md
+// creates the file README.md
 console.log('### - README.md');
 try {
   fs.writeFileSync(`${projectName}/HTML/README.md`, readmeTemplate());
 } catch (err) {
-  console.error('Errore nella creazione del file README.md:', err);
+  console.error('Error creating the file README.md:', err);
 }
 
 console.log('###');
-console.log('### Progetto creato con successo');
+console.log('### Project created successfully');
 console.log('### Happy hacking!');
 console.log('###');
