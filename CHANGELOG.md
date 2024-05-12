@@ -5,6 +5,10 @@
 ### Added | Fixed | Changed | Removed | Deprecated | Security
 - filename {section}: description
 -->
+## [1.2.0] - 2024-05-12
+
+- index.js: debugged; a better system to check for existing folders.
+- exitcodes.js: exports
 
 ## [1.1.0] - 2024-05-12
 
