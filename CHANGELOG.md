@@ -6,7 +6,9 @@
 - filename {section}: description
 -->
 
-## [Unreleased]
+## [1.1.0] - 2024-05-12
+
+First release
 
 - Setted a bin system
 - Updated <package.json> for the publication
