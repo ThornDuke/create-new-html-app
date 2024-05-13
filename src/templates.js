@@ -103,6 +103,7 @@ ${appName} -V, --version            print the version number
 
 const greetings = appName => `###
 ### Project ${appName} created successfully
+###
 ### Happy hacking!
 ###
 `;

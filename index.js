@@ -2,17 +2,14 @@ const fs = require('fs');
 const minimist = require('minimist');
 const prompt = require('prompt-sync')();
 const chalk = require('chalk');
+const shell = require('shelljs');
 
 const templates = require('./src/templates.js');
 const exitCodes = require('./src/exitcodes.js');
 const packageData = require('./package.json');
 
-/* ///////////////////////////////////////////
- *
- * Command line management
- *
- * //////////////////////////////////////// */
-
+////
+//Command line management
 const args = minimist(process.argv.slice(2));
 let projectName = args._[0];
 
@@ -26,25 +23,38 @@ if (args.help || args.h || !projectName || process.argv.length > 3) {
   process.exit(exitCodes.EC_HELP_DISPLAYED);
 }
 
-/* ///////////////////////////////////////////
- *
- * Main routine
- *
- * //////////////////////////////////////// */
+////
+// Main routine
 
+////
+// If the project directory already exists, it asks whether to overwrite it
 if (fs.existsSync(projectName)) {
-  const answer = prompt(chalk.yellowBright.bold(`\nThe directory ${projectName} already exists. Overwite it? [Y n] `));
+  const promptText = chalk.yellowBright.bold(`\nThe directory ${projectName} already exists. Overwite it? [Y n] `);
+  const answer = prompt(promptText);
   if (!['y', 'yes'].includes(answer.toLowerCase())) {
     process.exit(exitCodes.EC_USER_TERMINATED);
   }
 }
 
+////
+// If 'git' is not installed it warns the user that no repository will be initialized
+if (!shell.which('git')) {
+  const warnText = chalk.yellowBright.bold(
+    "\nI can't find git on this system. The repository will not be initialized.\n"
+  );
+  console.log(warnText);
+}
+
+////
+// helper functions:
+// create directory
 const mkSecureDir = dir => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
   }
 };
 
+// create file
 const mkFile = ({ path, logMsg, template, errMsg }) => {
   console.log(logMsg);
   try {
@@ -54,12 +64,13 @@ const mkFile = ({ path, logMsg, template, errMsg }) => {
   }
 };
 
-console.log('');
-console.log('');
-console.log(`##### ${packageData.name} v${packageData.version}`);
-console.log('###');
+////
+// Begins output to console
+console.log(`\n\n##### ${packageData.name} v${packageData.version}\n###`);
+
+////
 // creates the directory tree
-console.log('### creation of the directory tree');
+console.log('### creation of the directory tree ...\n###');
 try {
   mkSecureDir(`${projectName}`);
   mkSecureDir(`${projectName}/HTML`);
@@ -72,6 +83,7 @@ try {
 
 console.log('### creation of the files:');
 
+////
 // creates the HTML file
 mkFile({
   logMsg: '### - index.html',
@@ -80,6 +92,7 @@ mkFile({
   errMsg: 'Error creating the HTML file:',
 });
 
+////
 // creates the css file
 mkFile({
   logMsg: '### - public/styles.css',
@@ -88,6 +101,7 @@ mkFile({
   errMsg: 'Error creating the css file:',
 });
 
+////
 // creates the js file
 mkFile({
   logMsg: '### - public/script.js',
@@ -96,6 +110,7 @@ mkFile({
   errMsg: 'Error creating the js file:',
 });
 
+////
 // creates the file .prettierrc
 mkFile({
   logMsg: '### - .prettierrc',
@@ -104,6 +119,7 @@ mkFile({
   errMsg: 'Error creating the file .prettierrc:',
 });
 
+////
 // creates the file .gitignore
 mkFile({
   logMsg: '### - .gitignore',
@@ -112,6 +128,7 @@ mkFile({
   errMsg: 'Error creating the file ,gitignore:',
 });
 
+////
 // creates the file .vscode/launch.json
 mkFile({
   logMsg: '### - .vscode/launch.json',
@@ -120,6 +137,7 @@ mkFile({
   errMsg: 'Error creating the file .vscode/launch.json:',
 });
 
+////
 // creates the file CHANGELOG.md
 mkFile({
   logMsg: '### - CHANGELOG.md',
@@ -128,6 +146,7 @@ mkFile({
   errMsg: 'Error creating the file CHANGELOG.md:',
 });
 
+////
 // creates the file README.md
 mkFile({
   logMsg: '### - README.md',
@@ -136,6 +155,22 @@ mkFile({
   errMsg: 'Error creating the file README.md:',
 });
 
+////
+// If 'git' is installed, initialize a repository
+if (shell.which('git')) {
+  console.log('###\n### - Initialization of the git repo ...\n###');
+  shell.cd(`${projectName}/HTML`);
+  if (shell.exec('git init -qb master').code === 0) {
+    shell.exec('git add .');
+    shell.exec("git commit -aq --allow-empty-message -m ''");
+  } else {
+    shell.echo('Error: Git commit failed');
+    shell.exit(1);
+  }
+}
+
+////
+// greetings to console
 console.log(templates.greetings(projectName));
 
 module.exports = () => {};
