@@ -34,9 +34,6 @@ It asks for a project name (`project-name`) and creates the following structure:
             |-- script.js
 ```
 
-The `index.html` file consists of a basic template, while `styles.css` and `script.js` are empty files.
-`.vscode/launch.json` is a script useful for debugging your HTML application directly from VSCode.
-
 If `git` is available on your system, initializes the project repository.
 
 ## How to use
