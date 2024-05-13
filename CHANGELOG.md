@@ -6,6 +6,13 @@
 - filename {section}: description
 -->
 
+## [1.3.1] - 2024-05-13
+
+### Fixed
+
+- <index.js>: fixed the path reference
+- <templates.js>: fixed the path reference
+
 ## [1.3.0] - 2024-05-13
 
 ### Fixed

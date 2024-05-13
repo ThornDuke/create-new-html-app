@@ -96,7 +96,7 @@ mkFile({
 // creates the css file
 mkFile({
   logMsg: '### - public/styles.css',
-  path: `${projectName}/HTML/public/styles.css`,
+  path: `${projectName}/HTML/src/styles.css`,
   template: templates.css(projectName),
   errMsg: 'Error creating the css file:',
 });
@@ -105,7 +105,7 @@ mkFile({
 // creates the js file
 mkFile({
   logMsg: '### - public/script.js',
-  path: `${projectName}/HTML/public/script.js`,
+  path: `${projectName}/HTML/src/script.js`,
   template: templates.js(projectName),
   errMsg: 'Error creating the js file:',
 });
