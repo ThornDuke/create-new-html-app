@@ -39,5 +39,5 @@ If `git` is available on your system, initializes the project repository.
 ## How to use
 
 ```sh
-$ npx create-new-html-app <app-name>
+$> npx create-new-html-app <app-name>
 ```
