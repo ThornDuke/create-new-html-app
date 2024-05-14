@@ -34,10 +34,10 @@ It asks for a project name (`project-name`) and creates the following structure:
             |-- script.js
 ```
 
-If `git` is available on your system, initializes the project repository.
+If `git` is available on your system, `create-new-html-app` initializes the git repository into the project.
 
 ## How to use
 
 ```sh
-$> npx create-new-html-app <app-name>
+$ npx create-new-html-app <app-name>
 ```
