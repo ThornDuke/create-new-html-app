@@ -164,7 +164,7 @@ mkFile({
 mkFile({
   logMsg: '### - README.md',
   path: `${projectName}/HTML/README.md`,
-  template: templates.readme(),
+  template: templates.readme(projectName),
   errMsg: 'Error creating the file README.md:',
 });
 

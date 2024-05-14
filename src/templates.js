@@ -58,6 +58,8 @@ const changeLog = () => `# Change Log
 ### Added | Fixed | Changed | Removed | Deprecated | Security
 
 - filename {section}: description
+
+(example: https://gist.github.com/ThornDuke/64da76cd4a56b16492d5101691f6108f)
 -->
 
 ## [Unreleased]
