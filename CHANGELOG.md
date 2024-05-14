@@ -2,7 +2,9 @@
 
 <!--
 ## [Unreleased] | [major.minor.patch] - yyyy-mm-dd
+
 ### Added | Fixed | Changed | Removed | Deprecated | Security
+
 - filename {section}: description
 -->
 
@@ -15,9 +17,11 @@
 
 ### Changed
 
+- <templates.js> {changelog}: more understandable
 - <index.js>: the console is everywhere replaced by the terminal
+- <index.js>: rationalized the output to the terminal
 - <README.md>: shorter explanation and other details
-- <package.json>: better description
+- <package.json> {description}: better description
 
 ## [1.3.1] - 2024-05-13
 
