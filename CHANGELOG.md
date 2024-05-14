@@ -6,6 +6,19 @@
 - filename {section}: description
 -->
 
+## [Unreleased]
+
+### Added
+
+- <README.md>: badges
+- <index.js>: a helper function that sends errors to the terminal
+
+### Changed
+
+- <index.js>: the console is everywhere replaced by the terminal
+- <README.md>: shorter explanation and other details
+- <package.json>: better description
+
 ## [1.3.1] - 2024-05-13
 
 ### Fixed
@@ -27,8 +40,8 @@
 
 ## [1.2.0] - 2024-05-12
 
-- index.js: debugged; a better system to check for existing folders.
-- exitcodes.js: exports
+- <index.js>: debugged; a better system to check for existing folders.
+- <exitcodes.js>: exports
 
 ## [1.1.0] - 2024-05-12
 

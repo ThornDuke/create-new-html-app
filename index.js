@@ -9,17 +9,48 @@ const exitCodes = require('./src/exitcodes.js');
 const packageData = require('./package.json');
 
 ////
+// helper functions:
+// error messages to the console
+const echoError = (...msgs) => {
+  let errorStr = '';
+  msgs.forEach((msg, index, array) => {
+    errorStr += `\n${msg}`;
+    if (index === array.length - 1) {
+      errorStr += `\n`;
+    }
+  });
+  shell.echo(chalk.bold.redBright(errorStr));
+};
+
+// create directory
+const mkSecureDir = dir => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
+};
+
+// create file
+const mkFile = ({ path, logMsg, template, errMsg }) => {
+  shell.echo(logMsg);
+  try {
+    fs.writeFileSync(path, template);
+  } catch (err) {
+    echoError(errMsg, err);
+  }
+};
+
+////
 //Command line management
 const args = minimist(process.argv.slice(2));
 let projectName = args._[0];
 
 if (args.version || args.v) {
-  console.log(`\n${packageData.name} v${packageData.version}\n`);
+  shell.echo(`\n${packageData.name} v${packageData.version}\n`);
   process.exit(exitCodes.EC_VERSION_DISPLAYED);
 }
 
 if (args.help || args.h || !projectName || process.argv.length > 3) {
-  console.log(templates.help(packageData.name, packageData.version, packageData.description));
+  shell.echo(templates.help(packageData.name, packageData.version, packageData.description));
   process.exit(exitCodes.EC_HELP_DISPLAYED);
 }
 
@@ -42,35 +73,16 @@ if (!shell.which('git')) {
   const warnText = chalk.yellowBright.bold(
     "\nI can't find git on this system. The repository will not be initialized.\n"
   );
-  console.log(warnText);
+  shell.echo(warnText);
 }
 
 ////
-// helper functions:
-// create directory
-const mkSecureDir = dir => {
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
-  }
-};
-
-// create file
-const mkFile = ({ path, logMsg, template, errMsg }) => {
-  console.log(logMsg);
-  try {
-    fs.writeFileSync(path, template);
-  } catch (err) {
-    console.error(errMsg, err);
-  }
-};
-
-////
 // Begins output to console
-console.log(`\n\n##### ${packageData.name} v${packageData.version}\n###`);
+shell.echo(`\n\n##### ${packageData.name} v${packageData.version}\n###`);
 
 ////
 // creates the directory tree
-console.log('### creation of the directory tree ...\n###');
+shell.echo('### creation of the directory tree ...\n###');
 try {
   mkSecureDir(`${projectName}`);
   mkSecureDir(`${projectName}/HTML`);
@@ -78,10 +90,10 @@ try {
   mkSecureDir(`${projectName}/HTML/public`);
   mkSecureDir(`${projectName}/HTML/src`);
 } catch (err) {
-  console.error('Error creating the directory tree:', err);
+  echoError('Error creating the directory tree:', err);
 }
 
-console.log('### creation of the files:');
+shell.echo('### creation of the files:');
 
 ////
 // creates the HTML file
@@ -158,19 +170,19 @@ mkFile({
 ////
 // If 'git' is installed, initialize a repository
 if (shell.which('git')) {
-  console.log('###\n### - Initialization of the git repo ...\n###');
+  shell.echo('###\n### - Initialization of the git repo ...\n###');
   shell.cd(`${projectName}/HTML`);
   if (shell.exec('git init -qb master').code === 0) {
     shell.exec('git add .');
     shell.exec("git commit -aq --allow-empty-message -m ''");
   } else {
-    shell.echo('Error: Git commit failed');
+    echoError('Error: Git commit failed');
     shell.exit(1);
   }
 }
 
 ////
 // greetings to console
-console.log(templates.greetings(projectName));
+shell.echo(templates.greetings(projectName));
 
 module.exports = () => {};
