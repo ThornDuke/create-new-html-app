@@ -46,12 +46,12 @@ let projectName = args._[0];
 
 if (args.version || args.v) {
   shell.echo(`\n${packageData.name} v${packageData.version}\n`);
-  process.exit(exitCodes.EC_VERSION_DISPLAYED);
+  shell.exit(exitCodes.EC_VERSION_DISPLAYED);
 }
 
 if (args.help || args.h || !projectName || process.argv.length > 3) {
   shell.echo(templates.help(packageData.name, packageData.version, packageData.description));
-  process.exit(exitCodes.EC_HELP_DISPLAYED);
+  shell.exit(exitCodes.EC_HELP_DISPLAYED);
 }
 
 ////
@@ -63,7 +63,8 @@ if (fs.existsSync(projectName)) {
   const promptText = chalk.yellowBright.bold(`\nThe directory ${projectName} already exists. Overwite it? [Y n] `);
   const answer = prompt(promptText);
   if (!['y', 'yes'].includes(answer.toLowerCase())) {
-    process.exit(exitCodes.EC_USER_TERMINATED);
+    shell.echo(`\n`);
+    shell.exit(exitCodes.EC_USER_TERMINATED);
   }
 }
 
@@ -172,9 +173,9 @@ mkFile({
 if (shell.which('git')) {
   shell.echo('###\n### - Initialization of the git repo ...\n###');
   shell.cd(`${projectName}/HTML`);
-  if (shell.exec('git init -qb master').code === 0) {
-    shell.exec('git add .');
-    shell.exec("git commit -aq --allow-empty-message -m ''");
+  if (shell.exec('git init -qb master &> /dev/null').code === 0) {
+    shell.exec('git add . &> /dev/null');
+    shell.exec("git commit -aq --allow-empty-message -m '' &> /dev/null");
   } else {
     echoError('Error: Git commit failed');
     shell.exit(1);
