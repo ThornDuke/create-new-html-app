@@ -39,6 +39,10 @@ const mkFile = ({ path, logMsg, template, errMsg }) => {
   }
 };
 
+// - color strings into the terminal
+const blue = str => chalk.cyan(str);
+const pink = str => chalk.magenta(str);
+
 ////
 //Command line management
 const args = minimist(process.argv.slice(2));
@@ -79,11 +83,11 @@ if (!shell.which('git')) {
 
 ////
 // Begins output to console
-shell.echo(`\n\n##### ${packageData.name} v${packageData.version}\n###`);
+shell.echo(`\n\n${blue('###\n###')} ${pink(`=== ${packageData.name} v${packageData.version} ===`)}\n${blue('###')}`);
 
 ////
 // creates the directory tree
-shell.echo('### creation of the directory tree ...\n###');
+shell.echo(`${blue('###')} creation of the directory tree ...\n${blue('###')}`);
 try {
   mkSecureDir(`${projectName}`);
   mkSecureDir(`${projectName}/HTML`);
@@ -94,12 +98,12 @@ try {
   echoError('Error creating the directory tree:', err);
 }
 
-shell.echo('### creation of the files:');
+shell.echo(`${blue('###')} creation of the files:`);
 
 ////
 // creates the HTML file
 mkFile({
-  logMsg: '### - index.html',
+  logMsg: `${blue('###')} - index.html ...`,
   path: `${projectName}/HTML/index.html`,
   template: templates.html(projectName),
   errMsg: 'Error creating the HTML file:',
@@ -108,7 +112,7 @@ mkFile({
 ////
 // creates the css file
 mkFile({
-  logMsg: '### - public/styles.css',
+  logMsg: `${blue('###')} - public/styles.css ...`,
   path: `${projectName}/HTML/src/styles.css`,
   template: templates.css(projectName),
   errMsg: 'Error creating the css file:',
@@ -117,7 +121,7 @@ mkFile({
 ////
 // creates the js file
 mkFile({
-  logMsg: '### - public/script.js',
+  logMsg: `${blue('###')} - public/script.js ...`,
   path: `${projectName}/HTML/src/script.js`,
   template: templates.js(projectName),
   errMsg: 'Error creating the js file:',
@@ -126,7 +130,7 @@ mkFile({
 ////
 // creates the file .prettierrc
 mkFile({
-  logMsg: '### - .prettierrc',
+  logMsg: `${blue('###')} - .prettierrc ...`,
   path: `${projectName}/HTML/.prettierrc`,
   template: templates.prettier(),
   errMsg: 'Error creating the file .prettierrc:',
@@ -135,7 +139,7 @@ mkFile({
 ////
 // creates the file .vscode/launch.json
 mkFile({
-  logMsg: '### - .vscode/launch.json',
+  logMsg: `${blue('###')} - .vscode/launch.json ...`,
   path: `${projectName}/HTML/.vscode/launch.json`,
   template: templates.launch(),
   errMsg: 'Error creating the file .vscode/launch.json:',
@@ -144,7 +148,7 @@ mkFile({
 ////
 // creates the file CHANGELOG.md
 mkFile({
-  logMsg: '### - CHANGELOG.md',
+  logMsg: `${blue('###')} - CHANGELOG.md ...`,
   path: `${projectName}/HTML/CHANGELOG.md`,
   template: templates.changeLog(),
   errMsg: 'Error creating the file CHANGELOG.md:',
@@ -153,7 +157,7 @@ mkFile({
 ////
 // creates the file README.md
 mkFile({
-  logMsg: '### - README.md',
+  logMsg: `${blue('###')} - README.md ...`,
   path: `${projectName}/HTML/README.md`,
   template: templates.readme(projectName),
   errMsg: 'Error creating the file README.md:',
@@ -162,10 +166,10 @@ mkFile({
 ////
 // If 'git' is installed, initialize a repository
 if (shell.which('git')) {
-  shell.echo('###\n### initialization of the git repo ...\n###');
+  shell.echo(`${blue('###\n###')} initialization of the git repo ...\n${blue('###')}`);
 
   mkFile({
-    logMsg: '### creation of the file .gitignore',
+    logMsg: `${blue('###')} creation of the file .gitignore ...`,
     path: `${projectName}/HTML/.gitignore`,
     template: templates.gitIgnore(),
     errMsg: 'Error creating the file .gitignore:',

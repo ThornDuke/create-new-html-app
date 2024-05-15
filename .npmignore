@@ -1,0 +1,9 @@
+# editor configurations
+.vscode/
+
+# project configuration
+.nvmrc
+.prettierrc
+
+# private files
+*-notes.md

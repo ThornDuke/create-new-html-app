@@ -15,11 +15,19 @@
 ### Added
 
 - <exitcodes.js>: git error code
+- <.npmignore>: smaller bundle
 
 ### Changed
 
 - <index.js>: git error notification
 - <index.js>: <.gitignore> is created only if `git` is present on the system
+- <templates.js> {gitIgnore()}: ignore `.prettierrc` too
+- <index.js>: colored the terminal output
+- <templates.js>: colored the terminal output
+
+### Fixed
+
+- <README.md>: markdown rule MD014
 
 ## [1.3.2] - 2024-05-14
 

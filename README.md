@@ -39,5 +39,5 @@ If `git` is available on your system, `create-new-html-app` initializes the git 
 ## How to use
 
 ```sh
-$ npx create-new-html-app <app-name>
+npx create-new-html-app <app-name>
 ```

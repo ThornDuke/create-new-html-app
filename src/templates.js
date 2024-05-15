@@ -1,3 +1,7 @@
+const chalk = require('chalk');
+
+const blue = str => chalk.cyan(str);
+
 const html = appName => `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,7 +37,9 @@ const prettier = () => `{
   "singleAttributePerLine": false
 }`;
 
-const gitIgnore = () => `.vscode`;
+const gitIgnore = () =>
+  `.vscode/
+.prettierrc`;
 
 const launch = () => `{
   // Use IntelliSense to learn about possible attributes.
@@ -105,11 +111,11 @@ ${appName} -h, --help               print this help and exit
 ${appName} -V, --version            print the version number
 `;
 
-const greetings = appName => `###
-### Project ${appName} created successfully
-###
-### Happy hacking!
-###
+const greetings = appName => `${blue('###')}
+${blue('###')} Project ${appName} created successfully
+${blue('###')}
+${blue('###')} Happy hacking!
+${blue('###')}
 `;
 
 module.exports = {
