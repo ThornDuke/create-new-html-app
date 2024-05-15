@@ -10,6 +10,17 @@
 (example: https://gist.github.com/ThornDuke/64da76cd4a56b16492d5101691f6108f)
 -->
 
+## [Unreleased]
+
+### Added
+
+- <exitcodes.js>: git error code
+
+### Changed
+
+- <index.js>: git error notification
+- <index.js>: <.gitignore> is created only if `git` is present on the system
+
 ## [1.3.2] - 2024-05-14
 
 ### Added

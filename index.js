@@ -10,7 +10,7 @@ const packageData = require('./package.json');
 
 ////
 // helper functions:
-// error messages to the console
+// - error messages to the console
 const echoError = (...msgs) => {
   let errorStr = '';
   msgs.forEach((msg, index, array) => {
@@ -22,14 +22,14 @@ const echoError = (...msgs) => {
   shell.echo(chalk.bold.redBright(errorStr));
 };
 
-// create directory
+// - create directory
 const mkSecureDir = dir => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
   }
 };
 
-// create file
+// - create file
 const mkFile = ({ path, logMsg, template, errMsg }) => {
   shell.echo(logMsg);
   try {
@@ -133,15 +133,6 @@ mkFile({
 });
 
 ////
-// creates the file .gitignore
-mkFile({
-  logMsg: '### - .gitignore',
-  path: `${projectName}/HTML/.gitignore`,
-  template: templates.gitIgnore(),
-  errMsg: 'Error creating the file ,gitignore:',
-});
-
-////
 // creates the file .vscode/launch.json
 mkFile({
   logMsg: '### - .vscode/launch.json',
@@ -171,14 +162,22 @@ mkFile({
 ////
 // If 'git' is installed, initialize a repository
 if (shell.which('git')) {
-  shell.echo('###\n### - Initialization of the git repo ...\n###');
+  shell.echo('###\n### initialization of the git repo ...\n###');
+
+  mkFile({
+    logMsg: '### creation of the file .gitignore',
+    path: `${projectName}/HTML/.gitignore`,
+    template: templates.gitIgnore(),
+    errMsg: 'Error creating the file .gitignore:',
+  });
+
   shell.cd(`${projectName}/HTML`);
   if (shell.exec('git init -qb master &> /dev/null').code === 0) {
     shell.exec('git add . &> /dev/null');
     shell.exec("git commit -aq --allow-empty-message -m '' &> /dev/null");
   } else {
-    echoError('Error: Git commit failed');
-    shell.exit(1);
+    echoError('Error: Git initialization failed');
+    shell.exit(exitCodes.EC_GIT_NOT_INITIALIZED);
   }
 }
 
