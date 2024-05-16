@@ -118,5 +118,3 @@ ${blue('###')}
 ${blue('###')} Happy hacking!
 ${blue('###')}
 `;
-
-console.log({ module });
