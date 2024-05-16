@@ -1,8 +1,9 @@
 const chalk = require('chalk');
 
 const blue = str => chalk.cyan(str);
+const pink = str => chalk.magenta(str);
 
-const html = appName => `<!DOCTYPE html>
+exports.html = appName => `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -17,9 +18,9 @@ const html = appName => `<!DOCTYPE html>
   </body>
 </html>`;
 
-const css = appName => `/* project ${appName} */`;
+exports.css = appName => `/* project ${appName} */`;
 
-const prettier = () => `{
+exports.prettier = () => `{
   "printWidth": 120,
   "tabWidth": 2,
   "useTabs": false,
@@ -37,11 +38,11 @@ const prettier = () => `{
   "singleAttributePerLine": false
 }`;
 
-const gitIgnore = () =>
+exports.gitIgnore = () =>
   `.vscode/
 .prettierrc`;
 
-const launch = () => `{
+exports.launch = () => `{
   // Use IntelliSense to learn about possible attributes.
   // Existing attribute descriptions appear on mouseover.
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
@@ -56,7 +57,7 @@ const launch = () => `{
   ]
 }`;
 
-const changeLog = () => `# Change Log
+exports.changeLog = () => `# Change Log
 
 <!--
 ## [Unreleased] | [major.minor.patch] - yyyy-mm-dd
@@ -71,7 +72,7 @@ const changeLog = () => `# Change Log
 ## [Unreleased]
 `;
 
-const readme = appName => `# ${appName}
+exports.readme = appName => `# ${appName}
 
 <!-- App description -->
 
@@ -94,12 +95,12 @@ const readme = appName => `# ${appName}
 ## Acknowledgements
 `;
 
-const js = appName =>
+exports.js = appName =>
   `/**
  * project ${appName}
  */`;
 
-const help = (appName, appVersion, appDescription) => `
+exports.help = (appName, appVersion, appDescription) => `
 ${appName} v${appVersion}
 
 ${appDescription}
@@ -111,22 +112,11 @@ ${appName} -h, --help               print this help and exit
 ${appName} -V, --version            print the version number
 `;
 
-const greetings = appName => `${blue('###')}
-${blue('###')} Project ${appName} created successfully
+exports.greetings = appName => `${blue('###')}
+${blue('###')} ${pink(`Project ${appName} created successfully`)}
 ${blue('###')}
 ${blue('###')} Happy hacking!
 ${blue('###')}
 `;
 
-module.exports = {
-  html,
-  css,
-  prettier,
-  gitIgnore,
-  launch,
-  changeLog,
-  readme,
-  js,
-  help,
-  greetings,
-};
+console.log({ module });
