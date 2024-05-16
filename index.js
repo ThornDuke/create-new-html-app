@@ -64,7 +64,8 @@ if (args.help || args.h || !projectName || process.argv.length > 3) {
 ////
 // If the project directory already exists, it asks whether to overwrite it
 if (fs.existsSync(projectName)) {
-  const promptText = chalk.yellowBright.bold(`\nThe directory ${projectName} already exists. Overwite it? [Y n] `);
+  shell.echo(chalk.yellowBright.bold(`\nThe directory ${projectName} already exists.`));
+  const promptText = chalk.yellowBright.bold(`Overwite it? [Y/n] `);
   const answer = prompt(promptText);
   if (!['y', 'yes'].includes(answer.toLowerCase())) {
     shell.echo(`\n`);

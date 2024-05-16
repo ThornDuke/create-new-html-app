@@ -20,6 +20,7 @@
 ### Changed
 
 - <index.js>: git error notification
+- <index.js>: reviewed the ovrewriting of the already-existent project
 - <index.js>: <.gitignore> is created only if `git` is present on the system
 - <templates.js> {gitIgnore()}: ignore `.prettierrc` too
 - <templates.js> modified the export strategy
