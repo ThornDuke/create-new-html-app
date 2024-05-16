@@ -31,17 +31,20 @@ const mkSecureDir = dir => {
 
 // - create file
 const mkFile = ({ path, logMsg, template, errMsg }) => {
-  shell.echo(logMsg);
+  shell.echo('-n', logMsg);
   try {
     fs.writeFileSync(path, template);
+    shell.echo(' done');
   } catch (err) {
     echoError(errMsg, err);
+    shell.exit(exitCodes.EC_FILE_NOT_CREATED);
   }
 };
 
 // - color strings into the terminal
 const blue = str => chalk.cyan(str);
 const pink = str => chalk.magenta(str);
+const yellow = str => chalk.yellowBright.bold(str);
 
 ////
 //Command line management
@@ -64,8 +67,8 @@ if (args.help || args.h || !projectName || process.argv.length > 3) {
 ////
 // If the project directory already exists, it asks whether to overwrite it
 if (fs.existsSync(projectName)) {
-  shell.echo(chalk.yellowBright.bold(`\nThe directory ${projectName} already exists.`));
-  const promptText = chalk.yellowBright.bold(`Overwite it? [Y/n] `);
+  shell.echo(yellow(`\nThe directory ${projectName} already exists.`));
+  const promptText = yellow(`Overwite it? [Y/n] `);
   const answer = prompt(promptText);
   if (!['y', 'yes'].includes(answer.toLowerCase())) {
     shell.echo(`\n`);
@@ -74,32 +77,33 @@ if (fs.existsSync(projectName)) {
 }
 
 ////
-// If 'git' is not installed it warns the user that no repository will be initialized
-if (!shell.which('git')) {
-  const warnText = chalk.yellowBright.bold(
-    "\nI can't find git on this system. The repository will not be initialized.\n"
-  );
-  shell.echo(warnText);
-}
-
-////
 // Begins output to console
 shell.echo(`\n\n${blue('###\n###')} ${pink(`=== ${packageData.name} v${packageData.version} ===`)}\n${blue('###')}`);
 
 ////
+// If 'git' is not installed it warns the user that no repository will be initialized
+if (!shell.which('git')) {
+  let warnText = `${blue('###\n###')} ${yellow("I can't find git on this system.")}\n`;
+  warnText += `${blue('###')} ${yellow('The repository will not be initialized.')}\n`;
+  warnText += `${blue('###\n###')}`;
+  shell.echo(warnText);
+}
+
+////
 // creates the directory tree
-shell.echo(`${blue('###')} creation of the directory tree ...\n${blue('###')}`);
+shell.echo('-n', `${blue('###')} creation of the directory tree ...`);
 try {
   mkSecureDir(`${projectName}`);
   mkSecureDir(`${projectName}/HTML`);
   mkSecureDir(`${projectName}/HTML/.vscode`);
   mkSecureDir(`${projectName}/HTML/public`);
   mkSecureDir(`${projectName}/HTML/src`);
+  shell.echo(' done');
 } catch (err) {
   echoError('Error creating the directory tree:', err);
 }
 
-shell.echo(`${blue('###')} creation of the files:`);
+shell.echo(`${blue('###\n###')} creation of the files:`);
 
 ////
 // creates the HTML file
@@ -167,23 +171,27 @@ mkFile({
 ////
 // If 'git' is installed, initialize a repository
 if (shell.which('git')) {
-  shell.echo(`${blue('###\n###')} initialization of the git repo ...\n${blue('###')}`);
+  shell.echo('-n', `${blue('###\n###')} initialization of the git repo ...`);
 
-  mkFile({
-    logMsg: `${blue('###')} creation of the file .gitignore ...`,
-    path: `${projectName}/HTML/.gitignore`,
-    template: templates.gitIgnore(),
-    errMsg: 'Error creating the file .gitignore:',
-  });
+  const currDir = shell.pwd();
 
   shell.cd(`${projectName}/HTML`);
   if (shell.exec('git init -qb master &> /dev/null').code === 0) {
     shell.exec('git add . &> /dev/null');
     shell.exec("git commit -aq --allow-empty-message -m '' &> /dev/null");
+    shell.echo(' done');
   } else {
     echoError('Error: Git initialization failed');
     shell.exit(exitCodes.EC_GIT_NOT_INITIALIZED);
   }
+
+  shell.cd(currDir);
+  mkFile({
+    logMsg: `${blue('###\n###')} creation of the file .gitignore ...`,
+    path: `${projectName}/HTML/.gitignore`,
+    template: templates.gitIgnore(),
+    errMsg: 'Error creating the file .gitignore:',
+  });
 }
 
 ////

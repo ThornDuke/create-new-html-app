@@ -3,3 +3,4 @@ exports.EC_USER_TERMINATED = 1;
 exports.EC_HELP_DISPLAYED = 2;
 exports.EC_VERSION_DISPLAYED = 3;
 exports.EC_GIT_NOT_INITIALIZED = 4;
+exports.EC_FILE_NOT_CREATED = 5;

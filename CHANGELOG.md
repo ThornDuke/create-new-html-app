@@ -16,6 +16,7 @@
 
 - <exitcodes.js>: git error code
 - <.npmignore>: smaller bundle
+- <index.js>: notify the success of the operation with the word 'done'
 
 ### Changed
 
@@ -27,6 +28,7 @@
 - <exitcodes.js> modified the export strategy
 - <index.js>: colored the terminal output
 - <templates.js>: colored the terminal output
+- <index.js>: relocated the git warn
 
 ### Fixed
 
