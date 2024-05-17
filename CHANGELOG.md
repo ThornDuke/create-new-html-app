@@ -15,6 +15,7 @@
 ### Changed
 
 - <index.js>: relocated `.gitignore` creation
+- <index.js>: better coding style
 
 ## [1.4.0] - 2024-05-16
 

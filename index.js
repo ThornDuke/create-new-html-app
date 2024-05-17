@@ -46,9 +46,9 @@ const mkFile = ({ path, logMsg, template, errMsg }) => {
 };
 
 // - color strings into the terminal
-const blue = str => chalk.cyan(str);
-const pink = str => chalk.magenta(str);
-const yellow = str => chalk.yellowBright.bold(str);
+const blue = chalk.cyan;
+const pink = chalk.magenta;
+const yellow = chalk.yellowBright.bold;
 
 ////
 //Command line management
@@ -178,7 +178,6 @@ if (shell.which('git')) {
   shell.echo('-n', `${blue('###\n###')} initialization of the git repo ...`);
 
   mkFile({
-    // logMsg: `${blue('###\n###')} creation of the file .gitignore ...`,
     logMsg: '',
     path: `${projectName}/HTML/.gitignore`,
     template: templates.gitIgnore(),
