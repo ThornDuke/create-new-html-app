@@ -31,10 +31,14 @@ const mkSecureDir = dir => {
 
 // - create file
 const mkFile = ({ path, logMsg, template, errMsg }) => {
-  shell.echo('-n', logMsg);
+  if (logMsg !== '') {
+    shell.echo('-n', logMsg);
+  }
   try {
     fs.writeFileSync(path, template);
-    shell.echo(' done');
+    if (logMsg !== '') {
+      shell.echo(' done');
+    }
   } catch (err) {
     echoError(errMsg, err);
     shell.exit(exitCodes.EC_FILE_NOT_CREATED);
@@ -173,7 +177,13 @@ mkFile({
 if (shell.which('git')) {
   shell.echo('-n', `${blue('###\n###')} initialization of the git repo ...`);
 
-  const currDir = shell.pwd();
+  mkFile({
+    // logMsg: `${blue('###\n###')} creation of the file .gitignore ...`,
+    logMsg: '',
+    path: `${projectName}/HTML/.gitignore`,
+    template: templates.gitIgnore(),
+    errMsg: 'Error creating the file .gitignore:',
+  });
 
   shell.cd(`${projectName}/HTML`);
   if (shell.exec('git init -qb master &> /dev/null').code === 0) {
@@ -184,14 +194,6 @@ if (shell.which('git')) {
     echoError('Error: Git initialization failed');
     shell.exit(exitCodes.EC_GIT_NOT_INITIALIZED);
   }
-
-  shell.cd(currDir);
-  mkFile({
-    logMsg: `${blue('###\n###')} creation of the file .gitignore ...`,
-    path: `${projectName}/HTML/.gitignore`,
-    template: templates.gitIgnore(),
-    errMsg: 'Error creating the file .gitignore:',
-  });
 }
 
 ////
