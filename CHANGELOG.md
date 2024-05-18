@@ -16,6 +16,11 @@
 
 - <index.js>: relocated `.gitignore` creation
 - <index.js>: better coding style
+- <templates.js>: better coding style
+
+### Added
+
+- <index.js>: error control in the directory creation
 
 ## [1.4.0] - 2024-05-16
 

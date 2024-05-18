@@ -10,6 +10,12 @@ const packageData = require('./package.json');
 
 ////
 // helper functions:
+// - color strings into the terminal
+const blue = chalk.cyan;
+const pink = chalk.magenta;
+const yellow = chalk.yellowBright.bold;
+const errorRed = chalk.redBright.bold;
+
 // - error messages to the console
 const echoError = (...msgs) => {
   let errorStr = '';
@@ -19,36 +25,36 @@ const echoError = (...msgs) => {
       errorStr += `\n`;
     }
   });
-  shell.echo(chalk.bold.redBright(errorStr));
+  shell.echo(errorRed(errorStr));
 };
 
 // - create directory
 const mkSecureDir = dir => {
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
+  try {
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+    }
+  } catch (error) {
+    echoError(`Error creating ${dir}:`, error.message);
+    shell.exit(exitCodes.EC_DIRECTORY_NOT_CREATED);
   }
 };
 
 // - create file
 const mkFile = ({ path, logMsg, template, errMsg }) => {
   if (logMsg !== '') {
-    shell.echo('-n', logMsg);
+    shell.echo('-n', `${blue('###')} ${logMsg}`);
   }
   try {
     fs.writeFileSync(path, template);
     if (logMsg !== '') {
       shell.echo(' done');
     }
-  } catch (err) {
-    echoError(errMsg, err);
+  } catch (error) {
+    echoError(errMsg, error.message);
     shell.exit(exitCodes.EC_FILE_NOT_CREATED);
   }
 };
-
-// - color strings into the terminal
-const blue = chalk.cyan;
-const pink = chalk.magenta;
-const yellow = chalk.yellowBright.bold;
 
 ////
 //Command line management
@@ -87,7 +93,7 @@ shell.echo(`\n\n${blue('###\n###')} ${pink(`=== ${packageData.name} v${packageDa
 ////
 // If 'git' is not installed it warns the user that no repository will be initialized
 if (!shell.which('git')) {
-  let warnText = `${blue('###\n###')} ${yellow("I can't find git on this system.")}\n`;
+  let warnText = `${blue('###\n###')} ${yellow("Can't find git on this system.")}\n`;
   warnText += `${blue('###')} ${yellow('The repository will not be initialized.')}\n`;
   warnText += `${blue('###\n###')}`;
   shell.echo(warnText);
@@ -96,23 +102,19 @@ if (!shell.which('git')) {
 ////
 // creates the directory tree
 shell.echo('-n', `${blue('###')} creation of the directory tree ...`);
-try {
-  mkSecureDir(`${projectName}`);
-  mkSecureDir(`${projectName}/HTML`);
-  mkSecureDir(`${projectName}/HTML/.vscode`);
-  mkSecureDir(`${projectName}/HTML/public`);
-  mkSecureDir(`${projectName}/HTML/src`);
-  shell.echo(' done');
-} catch (err) {
-  echoError('Error creating the directory tree:', err);
-}
+mkSecureDir(`${projectName}`);
+mkSecureDir(`${projectName}/HTML`);
+mkSecureDir(`${projectName}/HTML/.vscode`);
+mkSecureDir(`${projectName}/HTML/public`);
+mkSecureDir(`${projectName}/HTML/src`);
+shell.echo(' done');
 
 shell.echo(`${blue('###\n###')} creation of the files:`);
 
 ////
 // creates the HTML file
 mkFile({
-  logMsg: `${blue('###')} - index.html ...`,
+  logMsg: `- index.html ...`,
   path: `${projectName}/HTML/index.html`,
   template: templates.html(projectName),
   errMsg: 'Error creating the HTML file:',
@@ -121,7 +123,7 @@ mkFile({
 ////
 // creates the css file
 mkFile({
-  logMsg: `${blue('###')} - public/styles.css ...`,
+  logMsg: `- public/styles.css ...`,
   path: `${projectName}/HTML/src/styles.css`,
   template: templates.css(projectName),
   errMsg: 'Error creating the css file:',
@@ -130,7 +132,7 @@ mkFile({
 ////
 // creates the js file
 mkFile({
-  logMsg: `${blue('###')} - public/script.js ...`,
+  logMsg: `- public/script.js ...`,
   path: `${projectName}/HTML/src/script.js`,
   template: templates.js(projectName),
   errMsg: 'Error creating the js file:',
@@ -139,7 +141,7 @@ mkFile({
 ////
 // creates the file .prettierrc
 mkFile({
-  logMsg: `${blue('###')} - .prettierrc ...`,
+  logMsg: `- .prettierrc ...`,
   path: `${projectName}/HTML/.prettierrc`,
   template: templates.prettier(),
   errMsg: 'Error creating the file .prettierrc:',
@@ -148,7 +150,7 @@ mkFile({
 ////
 // creates the file .vscode/launch.json
 mkFile({
-  logMsg: `${blue('###')} - .vscode/launch.json ...`,
+  logMsg: `- .vscode/launch.json ...`,
   path: `${projectName}/HTML/.vscode/launch.json`,
   template: templates.launch(),
   errMsg: 'Error creating the file .vscode/launch.json:',
@@ -157,7 +159,7 @@ mkFile({
 ////
 // creates the file CHANGELOG.md
 mkFile({
-  logMsg: `${blue('###')} - CHANGELOG.md ...`,
+  logMsg: `- CHANGELOG.md ...`,
   path: `${projectName}/HTML/CHANGELOG.md`,
   template: templates.changeLog(),
   errMsg: 'Error creating the file CHANGELOG.md:',
@@ -166,7 +168,7 @@ mkFile({
 ////
 // creates the file README.md
 mkFile({
-  logMsg: `${blue('###')} - README.md ...`,
+  logMsg: `- README.md ...`,
   path: `${projectName}/HTML/README.md`,
   template: templates.readme(projectName),
   errMsg: 'Error creating the file README.md:',

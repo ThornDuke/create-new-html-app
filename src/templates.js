@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 
-const blue = str => chalk.cyan(str);
-const pink = str => chalk.magenta(str);
+const blue = chalk.cyan;
+const pink = chalk.magenta;
 
 exports.html = appName => `<!DOCTYPE html>
 <html lang="en">
