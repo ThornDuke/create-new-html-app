@@ -8,7 +8,7 @@
 
 ![NPM Version](https://img.shields.io/npm/v/create-new-html-app?style=plastic&logo=npm&label=version)
 ![NPM Downloads](https://img.shields.io/npm/d18m/create-new-html-app?style=plastic&logo=npm)
-![NPM License](https://img.shields.io/npm/l/create-new-html-app?style=plastic&logo=GNU)
+[![NPM License](https://img.shields.io/npm/l/create-new-html-app?style=plastic&logo=GNU)](https://www.gnu.org/licenses/gpl-3.0.html)
 ![Node Current](https://img.shields.io/node/v/create-new-html-app?style=plastic&logo=nodedotjs&logoColor=white&logoSize=auto)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/create-new-html-app?style=plastic&logo=webpack)
 
