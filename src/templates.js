@@ -74,7 +74,7 @@ exports.changeLog = () => `# Change Log
 
 exports.readme = appName => `# ${appName}
 
-<!-- App description -->
+## Overview
 
 ## Features
 

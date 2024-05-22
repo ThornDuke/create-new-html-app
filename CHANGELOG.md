@@ -17,11 +17,14 @@
 - <index.js>: relocated `.gitignore` creation
 - <index.js>: better coding style
 - <templates.js>: better coding style
+- <templates.js> {readme}: the overview now is a chapter on his own
+- <README.md>: codeblock languages according to ace-mode
 
 ### Added
 
 - <index.js>: error control in the directory creation
 - <README.md>: badges correctly linked
+- <LICENCE>
 
 ## [1.4.0] - 2024-05-16
 

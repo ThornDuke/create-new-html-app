@@ -18,7 +18,7 @@ Sets up a simple HTML web app template by running one command.
 
 It asks for a project name (`project-name`) and creates the following structure:
 
-```txt
+```text
 |-- project-name/
     |-- HTML/
         |-- index.html
@@ -38,6 +38,6 @@ If `git` is available on your system, `create-new-html-app` initializes the git 
 
 ## How to use
 
-```sh
+```text
 npx create-new-html-app <app-name>
 ```
