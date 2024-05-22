@@ -21,6 +21,7 @@
 ### Added
 
 - <index.js>: error control in the directory creation
+- <README.md>: badges correctly linked
 
 ## [1.4.0] - 2024-05-16
 
