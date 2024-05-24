@@ -5,7 +5,7 @@
 
 ### Added | Fixed | Changed | Removed | Deprecated | Security
 
-- filename {section}: description
+- <filename> {section}: description
 
 (example: https://gist.github.com/ThornDuke/64da76cd4a56b16492d5101691f6108f)
 -->
@@ -23,7 +23,7 @@
 ### Added
 
 - <index.js>: error control in the directory creation
-- <README.md>: badges correctly linked
+- <README.md>: some badges correctly linked
 - <LICENCE>
 
 ## [1.4.0] - 2024-05-16
@@ -40,8 +40,8 @@
 - <index.js>: reviewed the ovrewriting of the already-existent project
 - <index.js>: <.gitignore> is created only if `git` is present on the system
 - <templates.js> {gitIgnore()}: ignore `.prettierrc` too
-- <templates.js> modified the export strategy
-- <exitcodes.js> modified the export strategy
+- <templates.js>: modified the export strategy
+- <exitcodes.js>: modified the export strategy
 - <index.js>: colored the terminal output
 - <templates.js>: colored the terminal output
 - <index.js>: relocated the git warn
