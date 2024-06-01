@@ -3,6 +3,7 @@ const minimist = require('minimist');
 const prompt = require('prompt-sync')();
 const chalk = require('chalk');
 const shell = require('shelljs');
+const clear = require('clear');
 
 const templates = require('./src/templates.js');
 const exitCodes = require('./src/exitcodes.js');
@@ -73,6 +74,7 @@ if (args.help || args.h || !projectName || process.argv.length > 3) {
 
 ////
 // Main routine
+clear();
 
 ////
 // If the project directory already exists, it asks whether to overwrite it
@@ -154,6 +156,15 @@ mkFile({
   path: `${projectName}/HTML/.vscode/launch.json`,
   template: templates.launch(),
   errMsg: 'Error creating the file .vscode/launch.json:',
+});
+
+////
+// creates the file .vscode/settings.json
+mkFile({
+  logMsg: `- .vscode/settings.json ...`,
+  path: `${projectName}/HTML/.vscode/settings.json`,
+  template: templates.vscodesettings(),
+  errMsg: 'Error creating the file .vscode/settings.json:',
 });
 
 ////

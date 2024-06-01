@@ -10,6 +10,20 @@
 (example: https://gist.github.com/ThornDuke/64da76cd4a56b16492d5101691f6108f)
 -->
 
+## [Unreleased]
+
+### Added
+
+- <templates.js> {vscodesettings}: created
+- <index.js>: create the `.vscode/settings.json` file
+- <README.md>: reference to `.vscode/settings.json`
+- <index.js>: clear the screen (is possible) before the output
+
+### Changed
+
+- <templates.js> {html}: the `script` tag is moved into the `head` section with a `defer` attribute, thus supporting a
+- <templates.js> {prettier}: `printWidth` now is 100
+
 ## [1.4.1] - 2024-05-24
 
 ### Changed
@@ -24,7 +38,7 @@
 
 - <index.js>: error control in the directory creation
 - <README.md>: some badges correctly linked
-- <LICENCE>
+- <LICENCE>: finally added
 
 ## [1.4.0] - 2024-05-16
 

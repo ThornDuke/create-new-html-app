@@ -11,17 +11,17 @@ exports.html = appName => `<!DOCTYPE html>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>${appName}</title>
     <link rel="stylesheet" href="src/styles.css" />
+    <script defer src="src/script.js"></script>
   </head>
   <body>
 
-    <script src="src/script.js"></script>
   </body>
 </html>`;
 
 exports.css = appName => `/* project ${appName} */`;
 
 exports.prettier = () => `{
-  "printWidth": 120,
+  "printWidth": 100,
   "tabWidth": 2,
   "useTabs": false,
   "semi": true,
@@ -55,6 +55,11 @@ exports.launch = () => `{
       "file": "./index.html"
     }
   ]
+}`;
+
+exports.vscodesettings = () => `{
+  "editor.wordWrapColumn": 100,
+  "editor.rulers": [100]
 }`;
 
 exports.changeLog = () => `# Change Log

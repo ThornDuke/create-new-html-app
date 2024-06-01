@@ -28,6 +28,7 @@ It asks for a project name (`project-name`) and creates the following structure:
         |-- .prettierrc
         |-- .vscode/
             |-- launch.json
+            |-- settings.json
         |-- public/
         |-- src/
             |-- styles.css
