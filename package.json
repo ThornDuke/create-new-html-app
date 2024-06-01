@@ -1,7 +1,7 @@
 {
   "name": "create-new-html-app",
   "description": "Sets up a simple HTML web app template by running one command.",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "author": "Thorn Duke",
   "keywords": [
     "cli",
