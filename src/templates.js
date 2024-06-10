@@ -52,7 +52,7 @@ exports.launch = () => `{
       "type": "chrome",
       "request": "launch",
       "name": "Open index.html",
-      "file": "./index.html"
+      "file": "\${workspaceFolder}/index.html"
     }
   ]
 }`;
@@ -120,6 +120,6 @@ ${appName} -V, --version            print the version number
 exports.greetings = appName => `${blue('###')}
 ${blue('###')} ${pink(`Project ${appName} created successfully`)}
 ${blue('###')}
-${blue('###')} Happy hacking!
+${blue('###')} Happy hacking! 🛩
 ${blue('###')}
 `;

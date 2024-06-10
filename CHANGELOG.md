@@ -2,13 +2,17 @@
 
 <!--
 ## [Unreleased] | [major.minor.patch] - yyyy-mm-dd
-
 ### Added | Fixed | Changed | Removed | Deprecated | Security
-
 - <filename> {section}: description
-
 (example: https://gist.github.com/ThornDuke/64da76cd4a56b16492d5101691f6108f)
 -->
+
+## [Unreleased]
+
+### Changed
+
+- <templates.js> {launch}: `configurations.file` more abstract
+- <templates.js> {greetings}: an airplane
 
 ## [1.4.2] - 2024-06-01
 
