@@ -7,6 +7,7 @@ const clear = require('clear');
 
 const templates = require('./src/templates.js');
 const exitCodes = require('./src/exitcodes.js');
+const files = require('./src/filedescriptions.js');
 const packageData = require('./package.json');
 
 ////
@@ -114,75 +115,9 @@ shell.echo(' done');
 shell.echo(`${blue('###\n###')} creation of the files:`);
 
 ////
-// creates the HTML file
-mkFile({
-  logMsg: `- index.html ...`,
-  path: `${projectName}/HTML/index.html`,
-  template: templates.html(projectName),
-  errMsg: 'Error creating the HTML file:',
-});
-
-////
-// creates the css file
-mkFile({
-  logMsg: `- public/styles.css ...`,
-  path: `${projectName}/HTML/src/styles.css`,
-  template: templates.css(projectName),
-  errMsg: 'Error creating the css file:',
-});
-
-////
-// creates the js file
-mkFile({
-  logMsg: `- public/script.js ...`,
-  path: `${projectName}/HTML/src/script.js`,
-  template: templates.js(projectName),
-  errMsg: 'Error creating the js file:',
-});
-
-////
-// creates the file .prettierrc
-mkFile({
-  logMsg: `- .prettierrc ...`,
-  path: `${projectName}/HTML/.prettierrc`,
-  template: templates.prettier(),
-  errMsg: 'Error creating the file .prettierrc:',
-});
-
-////
-// creates the file .vscode/launch.json
-mkFile({
-  logMsg: `- .vscode/launch.json ...`,
-  path: `${projectName}/HTML/.vscode/launch.json`,
-  template: templates.launch(),
-  errMsg: 'Error creating the file .vscode/launch.json:',
-});
-
-////
-// creates the file .vscode/settings.json
-mkFile({
-  logMsg: `- .vscode/settings.json ...`,
-  path: `${projectName}/HTML/.vscode/settings.json`,
-  template: templates.vscodesettings(),
-  errMsg: 'Error creating the file .vscode/settings.json:',
-});
-
-////
-// creates the file CHANGELOG.md
-mkFile({
-  logMsg: `- CHANGELOG.md ...`,
-  path: `${projectName}/HTML/CHANGELOG.md`,
-  template: templates.changeLog(),
-  errMsg: 'Error creating the file CHANGELOG.md:',
-});
-
-////
-// creates the file README.md
-mkFile({
-  logMsg: `- README.md ...`,
-  path: `${projectName}/HTML/README.md`,
-  template: templates.readme(projectName),
-  errMsg: 'Error creating the file README.md:',
+// creates the files
+files.fileDefaults(projectName).forEach(item => {
+  mkFile(item);
 });
 
 ////

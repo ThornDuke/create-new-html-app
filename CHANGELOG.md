@@ -14,6 +14,10 @@
 - <templates.js> {launch}: `configurations.file` more abstract
 - <templates.js> {greetings}: an airplane
 
+### Added
+
+- <filedescriptions.js>: abstraction of the files.
+
 ## [1.4.2] - 2024-06-01
 
 ### Added
