@@ -25,7 +25,7 @@
 - <templates.js> {vscodesettings}: created
 - <index.js>: create the `.vscode/settings.json` file
 - <README.md>: reference to `.vscode/settings.json`
-- <index.js>: clear the screen (is possible) before the output
+- <index.js>: clear the screen (if possible) before the output
 
 ### Changed
 
