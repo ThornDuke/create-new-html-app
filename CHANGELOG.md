@@ -16,7 +16,9 @@
 
 ### Added
 
-- <filedescriptions.js>: abstraction of the files.
+- <filedescriptions.js>: abstraction of the files
+- <cnha>: an alias for `create-new-html-app
+- <README.md> {How to use}: Instructions about the alias `cnha`
 
 ## [1.4.2] - 2024-06-01
 

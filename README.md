@@ -39,6 +39,18 @@ If `git` is available on your system, `create-new-html-app` initializes the git 
 
 ## How to use
 
-```text
+```bash
 npx create-new-html-app <app-name>
+```
+
+You can install the CLI globally with the instruction
+
+```bash
+npm install -g create-new-html-app
+```
+
+If the application is already installed you can use the alias `cnha` instead of its longer name:
+
+```bash
+cnha <appname>
 ```
