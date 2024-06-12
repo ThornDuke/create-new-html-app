@@ -9,8 +9,9 @@
 [![NPM Version](https://img.shields.io/npm/v/create-new-html-app?style=plastic&logo=npm&label=version)](https://www.npmjs.com/package/create-new-html-app)
 [![NPM Downloads](https://img.shields.io/npm/d18m/create-new-html-app?style=plastic&logo=npm)](https://www.npmjs.com/package/create-new-html-app)
 [![NPM License](https://img.shields.io/npm/l/create-new-html-app?style=plastic&logo=GNU)](https://www.gnu.org/licenses/gpl-3.0.html)
-![Node Current](https://img.shields.io/node/v/create-new-html-app?style=plastic&logo=nodedotjs&logoColor=white&logoSize=auto)
+[![Node Current](https://img.shields.io/node/v/create-new-html-app?style=plastic&logo=nodedotjs&logoColor=white&logoSize=auto)](https://nodejs.org/en)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/create-new-html-app?style=plastic&logo=webpack)
+[![Static Badge](https://img.shields.io/badge/powered-orange?style=plastic&logo=foobar2000&label=foobar2000)](https://www.foobar2000.org/)
 
 Sets up a simple HTML web app template by running one command.
 

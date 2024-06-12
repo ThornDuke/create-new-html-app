@@ -34,6 +34,13 @@
     "create-new-html-app": "bin/create-new-html-app",
     "cnha": "bin/cnha"
   },
+  "files": [
+    "index.js",
+    "LICENSE",
+    "README.md",
+    "bin",
+    "src"
+  ],
   "dependencies": {
     "chalk": "^4.1.2",
     "clear": "^0.1.0",

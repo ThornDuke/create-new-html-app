@@ -19,6 +19,7 @@
 - <filedescriptions.js>: abstraction of the files
 - <cnha>: an alias for `create-new-html-app
 - <README.md> {How to use}: Instructions about the alias `cnha`
+- <README.md> {badges}: foobar2000
 
 ## [1.4.2] - 2024-06-01
 
@@ -31,7 +32,8 @@
 
 ### Changed
 
-- <templates.js> {html}: the `script` tag is moved into the `head` section with a `defer` attribute, thus supporting a
+- <templates.js> {html}: the `script` tag is moved into the `head` section with a `defer` attribute,
+  thus supporting a
 - <templates.js> {prettier}: `printWidth` now is 100
 
 ## [1.4.1] - 2024-05-24
