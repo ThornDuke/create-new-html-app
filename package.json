@@ -31,7 +31,8 @@
     "stylecheck": "prettier . --check"
   },
   "bin": {
-    "create-new-html-app": "bin/create-new-html-app"
+    "create-new-html-app": "bin/create-new-html-app",
+    "cnha": "bin/cnha"
   },
   "dependencies": {
     "chalk": "^4.1.2",
