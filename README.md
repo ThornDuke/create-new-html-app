@@ -35,22 +35,31 @@ It asks for a project name (`project-name`) and creates the following structure:
             |-- script.js
 ```
 
-If `git` is available on your system, `create-new-html-app` initializes the git repository into the project.
+If `git` is available on your system, `create-new-html-app` initializes the git repository into the
+project.
 
 ## How to use
 
+### Temporary installation
+
+It only installs the application temporarily and runs it immediately. It does not take up disk space
+and does not use system global variables.
+
 ```bash
-npx create-new-html-app <app-name>
+npx create-new-html-app <project-name>
 ```
 
-You can install the CLI globally with the instruction
+### Permanent installation
+
+Allows you to use the application even offline.
 
 ```bash
 npm install -g create-new-html-app
 ```
 
-If the application is already installed you can use the alias `cnha` instead of its longer name:
+If the application is already installed globally you can use the alias `cnha` instead of its longer
+name:
 
 ```bash
-cnha <appname>
+cnha <project-name>
 ```
