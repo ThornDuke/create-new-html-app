@@ -9,17 +9,17 @@
 
 ## [Unreleased]
 
-### Changed
-
-- <templates.js> {launch}: `configurations.file` more abstract
-- <templates.js> {greetings}: an airplane
-
 ### Added
 
 - <filedescriptions.js>: abstraction of the files
 - <cnha>: an alias for `create-new-html-app
 - <README.md> {How to use}: Instructions about the alias `cnha`
 - <README.md> {badges}: foobar2000
+
+### Changed
+
+- <templates.js> {launch}: `configurations.file` more abstract
+- <templates.js> {greetings}: an airplane
 
 ## [1.4.2] - 2024-06-01
 
@@ -38,6 +38,12 @@
 
 ## [1.4.1] - 2024-05-24
 
+### Added
+
+- <index.js>: error control in the directory creation
+- <README.md>: some badges correctly linked
+- <LICENCE>: finally added
+
 ### Changed
 
 - <index.js>: relocated `.gitignore` creation
@@ -46,12 +52,6 @@
 - <templates.js> {readme}: the overview now is a chapter on his own
 - <README.md>: codeblock languages according to ace-mode
 
-### Added
-
-- <index.js>: error control in the directory creation
-- <README.md>: some badges correctly linked
-- <LICENCE>: finally added
-
 ## [1.4.0] - 2024-05-16
 
 ### Added
@@ -59,6 +59,10 @@
 - <exitcodes.js>: git error code
 - <.npmignore>: smaller bundle
 - <index.js>: notify the success of the operation with the word 'done'
+
+### Fixed
+
+- <README.md>: markdown rule MD014
 
 ### Changed
 
@@ -71,10 +75,6 @@
 - <index.js>: colored the terminal output
 - <templates.js>: colored the terminal output
 - <index.js>: relocated the git warn
-
-### Fixed
-
-- <README.md>: markdown rule MD014
 
 ## [1.3.2] - 2024-05-14
 
@@ -101,15 +101,16 @@
 
 ## [1.3.0] - 2024-05-13
 
-### Fixed
-
-- Various bugs
-
 ### Added
 
 - <index.js>: When it creates a project initializes a git repo in it
 - <index.js>: Uses chalks and shelljs
 - <README.md>: badges
+-
+
+### Fixed
+
+- Various bugs
 
 ## [1.2.0] - 2024-05-12
 

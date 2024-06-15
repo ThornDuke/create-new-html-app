@@ -59,7 +59,7 @@ const mkFile = ({ path, logMsg, template, errMsg }) => {
 };
 
 ////
-//Command line management
+// Command line management
 const args = minimist(process.argv.slice(2));
 let projectName = args._[0];
 
@@ -74,7 +74,7 @@ if (args.help || args.h || !projectName || process.argv.length > 3) {
 }
 
 ////
-// Main routine
+// Start main routine
 clear();
 
 ////
@@ -91,7 +91,9 @@ if (fs.existsSync(projectName)) {
 
 ////
 // Begins output to console
-shell.echo(`\n\n${blue('###\n###')} ${pink(`=== ${packageData.name} v${packageData.version} ===`)}\n${blue('###')}`);
+shell.echo(
+  `\n\n${blue('###\n###')} ${pink(`=== ${packageData.name} v${packageData.version} ===`)}\n${blue('###')}`
+);
 
 ////
 // If 'git' is not installed it warns the user that no repository will be initialized
