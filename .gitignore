@@ -120,6 +120,7 @@ dist
 ####
 # this project
 ##
+.DS_Store
 project-notes.*
 package-lock.json
 project-notes.md
