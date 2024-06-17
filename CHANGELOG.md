@@ -7,6 +7,12 @@
 (example: https://gist.github.com/ThornDuke/64da76cd4a56b16492d5101691f6108f)
 -->
 
+## [Unreleased]
+
+### Changed
+
+- <templates.js> {prettier}: `jsxBracketSameLine` is deprecated; now uses `bracketSameLine`
+
 ## [1.4.3] - 2024-06-15
 
 ### Added

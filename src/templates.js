@@ -30,7 +30,7 @@ exports.prettier = () => `{
   "jsxSingleQuote": false,
   "trailingComma": "es5",
   "bracketSpacing": true,
-  "jsxBracketSameLine": false,
+  "bracketSameLine": false,
   "arrowParens": "avoid",
   "proseWrap": "always",
   "htmlWhitespaceSensitivity": "css",
