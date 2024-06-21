@@ -9,6 +9,7 @@ const templates = require('./src/templates.js');
 const exitCodes = require('./src/exitcodes.js');
 const files = require('./src/filedescriptions.js');
 const packageData = require('./package.json');
+const { hasSpaces, isValidFilename, sanitizeFilename } = require('./src/sanitizefilenames.js');
 
 ////
 // helper functions:
@@ -63,6 +64,10 @@ const mkFile = ({ path, logMsg, template, errMsg }) => {
 const args = minimist(process.argv.slice(2));
 let projectName = args._[0];
 
+if (!isValidFilename(projectName) || hasSpaces(projectName)) {
+  projectName = sanitizeFilename(projectName);
+}
+
 if (args.version || args.v) {
   shell.echo(`\n${packageData.name} v${packageData.version}\n`);
   shell.exit(exitCodes.EC_VERSION_DISPLAYED);
@@ -93,6 +98,12 @@ if (fs.existsSync(projectName)) {
 // Begins output to console
 shell.echo(
   `\n\n${blue('###\n###')} ${pink(`=== ${packageData.name} v${packageData.version} ===`)}\n${blue('###')}`
+);
+
+////
+// warns the user about the creation of the project
+shell.echo(
+  `${blue('###')} Creating the project '${projectName}' in\n${blue('###')} ${shell.pwd()}\n${blue('###')}`
 );
 
 ////

@@ -9,6 +9,12 @@
 
 ## [Unreleased]
 
+### Added
+
+- <index.js>: outputs a warning about the creation of the project
+- <sanitizefilenames.js>: a module for sanitize strings used as filenames
+- <index.js>: the project-name is converted to a valid filename before the creation of the project
+
 ### Changed
 
 - <templates.js> {prettier}: `jsxBracketSameLine` is deprecated; now uses `bracketSameLine`
