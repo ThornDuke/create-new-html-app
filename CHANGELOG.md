@@ -24,7 +24,7 @@
 ### Added
 
 - <filedescriptions.js>: abstraction of the files
-- <cnha>: an alias for `create-new-html-app
+- <cnha~>: an alias for `create-new-html-app
 - <README.md> {How to use}: Instructions about the alias `cnha`
 - <README.md> {badges}: foobar2000
 
@@ -54,7 +54,7 @@
 
 - <index.js>: error control in the directory creation
 - <README.md>: some badges correctly linked
-- <LICENCE>: finally added
+- <LICENCE~>: finally added
 
 ### Changed
 

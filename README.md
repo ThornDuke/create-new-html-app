@@ -36,8 +36,10 @@ It asks for a project name (`project-name`) and creates the following structure:
             |-- script.js
 ```
 
-If `git` is available on your system, `create-new-html-app` initializes the git repository into the
-project.
+If `project-name` contains illegal characters for a file name, they are replaced by valid
+characters.
+
+If `git` is present on the user's system, a new repository is initialized within the project.
 
 ## How to use
 

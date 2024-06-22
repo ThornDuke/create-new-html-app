@@ -33,10 +33,6 @@ function sanitizeFilename(string) {
 
   const replacement = '!';
 
-  if (filenameReservedRegex.test(replacement) && reControlChars.test(replacement)) {
-    throw new Error('Replacement string cannot contain reserved filename characters');
-  }
-
   string = string.trim().replace(/(\s){2,}/g, '$1');
   string = string.replace(/\s/g, '-');
   string = string.replace(reRepeatedReservedCharacters, '$1');
