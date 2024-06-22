@@ -7,17 +7,25 @@
 (example: https://gist.github.com/ThornDuke/64da76cd4a56b16492d5101691f6108f)
 -->
 
-## [Unreleased]
+## [1.5.0] - 2024-06-22
 
 ### Added
 
 - <index.js>: outputs a warning about the creation of the project
 - <sanitizefilenames.js>: a module for sanitize strings used as filenames
 - <index.js>: the project-name is converted to a valid filename before the creation of the project
+- <filedescriptions.js> {directoryTree}: The directory list has been isolated in a specific function
 
 ### Changed
 
 - <templates.js> {prettier}: `jsxBracketSameLine` is deprecated; now uses `bracketSameLine`
+- <filedescriptions.js> {fileDefaults}: The `index.html` file has been moved into the `public`
+  directory because some programs (e.g. `http-server`) expect, by default, to find it there
+- <templates.js> {html}: changes resulting from the move of `index.html`
+
+### Fixed
+
+- <filedescriptions.js> {fileDefaults}: Some templates were called with an incorrect `logMsg`
 
 ## [1.4.3] - 2024-06-15
 
