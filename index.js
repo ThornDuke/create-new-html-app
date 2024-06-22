@@ -7,7 +7,7 @@ const clear = require('clear');
 
 const templates = require('./src/templates.js');
 const exitCodes = require('./src/exitcodes.js');
-const files = require('./src/filedescriptions.js');
+const { fileDefaults, directoryTree } = require('./src/filedescriptions.js');
 const packageData = require('./package.json');
 const { hasSpaces, isValidFilename, sanitizeFilename } = require('./src/sanitizefilenames.js');
 
@@ -118,20 +118,14 @@ if (!shell.which('git')) {
 ////
 // creates the directory tree
 shell.echo('-n', `${blue('###')} creation of the directory tree ...`);
-mkSecureDir(`${projectName}`);
-mkSecureDir(`${projectName}/HTML`);
-mkSecureDir(`${projectName}/HTML/.vscode`);
-mkSecureDir(`${projectName}/HTML/public`);
-mkSecureDir(`${projectName}/HTML/src`);
+directoryTree(projectName).forEach(dir => mkSecureDir(dir));
 shell.echo(' done');
 
 shell.echo(`${blue('###\n###')} creation of the files:`);
 
 ////
 // creates the files
-files.fileDefaults(projectName).forEach(item => {
-  mkFile(item);
-});
+fileDefaults(projectName).forEach(item => mkFile(item));
 
 ////
 // If 'git' is installed, initialize a repository

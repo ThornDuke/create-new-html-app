@@ -10,8 +10,8 @@ exports.html = appName => `<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>${appName}</title>
-    <link rel="stylesheet" href="src/styles.css" />
-    <script defer src="src/script.js"></script>
+    <link rel="stylesheet" href="../src/styles.css" />
+    <script defer src="../src/script.js"></script>
   </head>
   <body>
 

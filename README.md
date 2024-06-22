@@ -22,7 +22,6 @@ It asks for a project name (`project-name`) and creates the following structure:
 ```text
 |-- project-name/
     |-- HTML/
-        |-- index.html
         |-- README.md
         |-- CHANGELOG.md
         |-- .gitignore
@@ -31,6 +30,7 @@ It asks for a project name (`project-name`) and creates the following structure:
             |-- launch.json
             |-- settings.json
         |-- public/
+            |-- index.html
         |-- src/
             |-- styles.css
             |-- script.js
