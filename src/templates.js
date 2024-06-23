@@ -52,7 +52,7 @@ exports.launch = () => `{
       "type": "chrome",
       "request": "launch",
       "name": "Open index.html",
-      "file": "\${workspaceFolder}/index.html"
+      "file": "\${workspaceFolder}/public/index.html"
     }
   ]
 }`;

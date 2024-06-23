@@ -64,10 +64,6 @@ const mkFile = ({ path, logMsg, template, errMsg }) => {
 const args = minimist(process.argv.slice(2));
 let projectName = args._[0];
 
-if (!isValidFilename(projectName) || hasSpaces(projectName)) {
-  projectName = sanitizeFilename(projectName);
-}
-
 if (args.version || args.v) {
   shell.echo(`\n${packageData.name} v${packageData.version}\n`);
   shell.exit(exitCodes.EC_VERSION_DISPLAYED);
@@ -76,6 +72,10 @@ if (args.version || args.v) {
 if (args.help || args.h || !projectName || process.argv.length > 3) {
   shell.echo(templates.help(packageData.name, packageData.version, packageData.description));
   shell.exit(exitCodes.EC_HELP_DISPLAYED);
+}
+
+if (!isValidFilename(projectName) || hasSpaces(projectName)) {
+  projectName = sanitizeFilename(projectName);
 }
 
 ////

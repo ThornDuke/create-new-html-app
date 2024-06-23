@@ -7,6 +7,13 @@
 (example: https://gist.github.com/ThornDuke/64da76cd4a56b16492d5101691f6108f)
 -->
 
+## [Unreleased]
+
+### Fixed
+
+- <templates.js> {launch}: now points to the correct file
+- <index.js>: Fixed a regression that hid some command line parameters
+
 ## [1.5.0] - 2024-06-22
 
 ### Added
