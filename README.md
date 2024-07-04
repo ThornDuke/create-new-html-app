@@ -46,7 +46,7 @@ If `git` is present on the user's system, a new repository is initialized within
 ### Temporary installation
 
 It only installs the application temporarily and runs it immediately. It does not take up disk space
-and does not use system global variables.
+and does not use global system variables.
 
 ```bash
 npx create-new-html-app <project-name>
