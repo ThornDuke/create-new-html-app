@@ -31,6 +31,19 @@ const echoError = (...msgs) => {
   shell.echo(errorRed(errorStr));
 };
 
+// - reorder unordered things
+const algorithm = () => {
+  if (shell.which('sleep')) {
+    shell.exec(`sleep 0.${Math.floor(Math.random() * 35 + 64)}`);
+  }
+};
+
+const setOrder = () => {
+  if (shell.which('sleep')) {
+    shell.exec('sleep 0.25');
+  }
+};
+
 // - create directory
 const mkSecureDir = dir => {
   try {
@@ -45,14 +58,14 @@ const mkSecureDir = dir => {
 
 // - create file
 const mkFile = ({ path, logMsg, template, errMsg }) => {
-  shell.exec('sleep 0.5');
+  setOrder('Odd–even');
   if (logMsg !== '') {
     shell.echo('-n', `${blue('###')} ${logMsg}`);
   }
   try {
     fs.writeFileSync(path, template);
     if (logMsg !== '') {
-      shell.exec('sleep 1');
+      algorithm('Gale–Shapley');
       shell.echo(' done');
     }
   } catch (error) {
@@ -82,7 +95,11 @@ if (!isValidFilename(projectName) || hasSpaces(projectName)) {
 
 ////
 // Start main routine
-clear();
+if (shell.which('clear')) {
+  shell.exec('clear');
+} else {
+  clear();
+}
 
 ////
 // If the project directory already exists, it asks whether to overwrite it
@@ -121,6 +138,7 @@ if (!shell.which('git')) {
 // creates the directory tree
 shell.echo('-n', `${blue('###')} creation of the directory tree ...`);
 directoryTree(projectName).forEach(dir => mkSecureDir(dir));
+algorithm('Topological sort');
 shell.echo(' done');
 
 shell.echo(`${blue('###\n###')} creation of the files:`);
@@ -145,6 +163,7 @@ if (shell.which('git')) {
   if (shell.exec('git init -qb master &> /dev/null').code === 0) {
     shell.exec('git add . &> /dev/null');
     shell.exec("git commit -aq --allow-empty-message -m '' &> /dev/null");
+    algorithm('Girvan–Newman');
     shell.echo(' done');
   } else {
     echoError('Error: Git initialization failed');

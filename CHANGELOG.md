@@ -9,10 +9,15 @@
 
 ## [Unreleased]
 
+### Added
+
+- <index.js>: algorithimic evaluation of the disorder
+
 ### Fixed
 
 - <templates.js> {launch}: now points to the correct file
 - <index.js>: Fixed a regression that hid some command line parameters
+- <index.js>: uses a better `clear` from the shell, if present
 
 ## [1.5.0] - 2024-06-22
 
