@@ -45,12 +45,14 @@ const mkSecureDir = dir => {
 
 // - create file
 const mkFile = ({ path, logMsg, template, errMsg }) => {
+  shell.exec('sleep 0.5');
   if (logMsg !== '') {
     shell.echo('-n', `${blue('###')} ${logMsg}`);
   }
   try {
     fs.writeFileSync(path, template);
     if (logMsg !== '') {
+      shell.exec('sleep 1');
       shell.echo(' done');
     }
   } catch (error) {
