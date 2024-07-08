@@ -7,7 +7,7 @@
 (example: https://gist.github.com/ThornDuke/64da76cd4a56b16492d5101691f6108f)
 -->
 
-## [Unreleased]
+## [1.5.1] - 2024-07-08
 
 ### Added
 
