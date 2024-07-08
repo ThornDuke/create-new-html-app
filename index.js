@@ -40,7 +40,7 @@ const algorithm = () => {
 
 const setOrder = () => {
   if (shell.which('sleep')) {
-    shell.exec('sleep 0.25');
+    shell.exec('sleep 0.3');
   }
 };
 
